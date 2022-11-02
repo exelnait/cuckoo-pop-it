@@ -1,3 +1,4 @@
+import 'package:client/components/button.dart';
 import 'package:client/cubit/game_cubit.dart';
 import 'package:client/get_it.dart';
 import 'package:client/screens/finish_screen.dart';
@@ -7,8 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
 
 final LiveQuery liveQuery = LiveQuery();
-QueryBuilder<ParseObject> query =
-    QueryBuilder<ParseObject>(ParseObject('Room'))..whereEqualTo('isStarted', false);
+QueryBuilder<ParseObject> query = QueryBuilder<ParseObject>(ParseObject('Room'))
+  ..whereEqualTo('isStarted', false);
 
 class RoomsList extends StatelessWidget {
   RoomsList({super.key});
@@ -31,12 +32,11 @@ class RoomsList extends StatelessWidget {
     return SingleChildScrollView(
       child: Column(
         children: [
-          MaterialButton(
-              onPressed: () {
-                createRoom(context);
-              },
-              child: Text('Create game')),
-          SizedBox(height: 20),
+          AnimatedButton(
+            onTap: () {
+              createRoom(context);
+            },
+          ),
           ParseLiveListWidget<ParseObject>(
             shrinkWrap: true,
             query: query,
