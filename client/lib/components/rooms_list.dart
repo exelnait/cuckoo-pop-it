@@ -33,6 +33,7 @@ class RoomsList extends StatelessWidget {
           MaterialButton(onPressed: () {
             createRoom(context);
           }, child: Text('Create game')),
+          SizedBox(height: 20),
           ParseLiveListWidget<ParseObject>(
             shrinkWrap: true,
             query: query,

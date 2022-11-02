@@ -14,6 +14,7 @@ class RoomService {
     var room = Room()
       ..title = UsernameGen().generate()
       ..creatorId = _myUserId
+      ..isStarted = false
       ..participants = [_myUserId];
     // ..set('color',
     //     Color((Random().nextDouble() * 0xFFFFFF).toInt()).withOpacity(1.0))
@@ -24,6 +25,11 @@ class RoomService {
 
   participateRoom(roomId) async {
     var updatedRoom = Room()..objectId = roomId..setAddUnique('participants', _myUserId);
+    await updatedRoom.save();
+  }
+
+  startGame(roomId) async {
+    var updatedRoom = Room()..objectId = roomId..set('isStarted', true);
     await updatedRoom.save();
   }
 
@@ -49,15 +55,15 @@ class Room extends ParseObject implements ParseCloneable {
   static const String keyTableName = 'Room';
 
   String? get title => get<String?>('title');
-
   set title(String? title) => set<String?>('title', title);
 
-  String? get creatorId => get<String?>('creatorId');
+  bool? get isStarted => get<bool?>('isStarted');
+  set isStarted(bool? isStarted) => set<bool?>('isStarted', isStarted);
 
+  String? get creatorId => get<String?>('creatorId');
   set creatorId(String? creatorId) => set<String?>('creatorId', creatorId);
 
   List<dynamic>? get participants => get<List<dynamic>>('participants');
-
   set participants(List<dynamic>? participants) =>
       set<List<dynamic>?>('participants', participants);
 }
