@@ -53,9 +53,23 @@ class _GameViewState extends State<_GameView> {
               children: [
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Text(state.title),
+                  child:
+                      Text(state.title, style: const TextStyle(fontSize: 20)),
                 ),
-                Text('Participants: ${state.participants.length}'),
+                Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text('Participants: ${state.participants.length}'),
+                    Column(
+                        children: state.participants
+                            .map((participant) => Container(
+                                margin: const EdgeInsets.only(top: 5),
+                                child: Chip(
+                                    label: Text(participant),
+                                    backgroundColor: Colors.red)))
+                            .toList())
+                  ],
+                ),
                 SizedBox(height: 20),
                 state.isStarted
                     ? Center(
@@ -63,7 +77,8 @@ class _GameViewState extends State<_GameView> {
                             itemCount: state.nodes.length,
                             shrinkWrap: true,
                             itemBuilder: (context, i) => Row(
-                                    children: List.generate(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: List.generate(
                                   state.nodes[i].length,
                                   (j) => Node(
                                       color: Colors.green,
