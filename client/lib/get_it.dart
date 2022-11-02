@@ -1,4 +1,5 @@
 import 'package:client/cubit/game_cubit.dart';
+import 'package:client/services/game_event_service.dart';
 import 'package:client/services/room_service.dart';
 import 'package:get_it/get_it.dart';
 
@@ -11,4 +12,5 @@ void setup() {
 
   getIt.registerLazySingleton<AuthService>(() => AuthService());
   getIt.registerLazySingleton<RoomService>(() => RoomService());
+  getIt.registerLazySingleton<GameEventService>(() => GameEventService());
 }
