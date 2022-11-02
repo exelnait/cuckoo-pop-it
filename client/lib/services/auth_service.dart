@@ -1,3 +1,4 @@
+import 'package:client/services/game_event_service.dart';
 import 'package:client/services/room_service.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
@@ -23,6 +24,7 @@ class AuthService {
         autoSendSessionId: true,
       registeredSubClassMap: <String, ParseObjectConstructor>{
         Room.keyTableName: () => Room(),
+        GameEvent.keyTableName: () => GameEvent(),
       },
     );
     await getCurrentUser();

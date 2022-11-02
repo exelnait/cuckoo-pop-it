@@ -59,3 +59,4 @@
 {"level":"info","message":"Client disconnect: 37d247a1-89c7-43c0-a8a1-2a20f826a994","timestamp":"2022-11-02T11:12:31.387Z"}
 {"level":"info","message":"Create new client: 605ae0c7-f50d-4f8d-9211-97acbadaab26","timestamp":"2022-11-02T11:12:33.084Z"}
 {"level":"info","message":"Create new client: e46ecefc-7f7e-4781-b77a-3a87eedbb953","timestamp":"2022-11-02T11:17:09.864Z"}
+{"level":"info","message":"Parse LiveQuery Server starts running","timestamp":"2022-11-02T12:36:59.652Z"}

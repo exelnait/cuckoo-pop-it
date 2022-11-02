@@ -8,7 +8,7 @@ const api = new ParseServer({
     ...config,
     allowHeaders: ['X-Parse-Installation-Id', 'X-Parse-Client-Key'],
     liveQuery: {
-        classNames: ["Room", "Step"]
+        classNames: ["Room", "GameEvent"]
     }
 });
 
