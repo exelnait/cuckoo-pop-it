@@ -62,7 +62,7 @@ class GameCubit extends Cubit<GameState> {
   void tapNode(int y, int x) async {
     if (!state.nodes[y][x].isActive) {
       updateNode(y, x, _authService.user!.objectId!);
-      await _gameEventService.create(room!.objectId!, y, x);
+      await _gameEventService.create(room!.objectId!, x, y);
     }
   }
 

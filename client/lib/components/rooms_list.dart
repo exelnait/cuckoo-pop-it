@@ -55,9 +55,13 @@ class RoomsList extends StatelessWidget {
                   title: Text(
                     snapshot.loadedData?.get("title"),
                   ),
-                  onTap: () => openGame(snapshot.loadedData?.get("objectId"), context),
+                  onTap:  () {
+                    if (!snapshot.loadedData?.get("isStarted")) {
+                      openGame(snapshot.loadedData?.objectId, context);
+                    }
+                  },
                   subtitle: Text(
-                      'Participants: ${snapshot.loadedData?.get("participants").length}'),
+                      '${snapshot.loadedData?.get("isStarted") ? 'Started. ': ''}Participants: ${snapshot.loadedData?.get("participants").length}'),
                 );
               } else {
                 return const ListTile(
