@@ -6,8 +6,10 @@ import 'package:client/services/room_service.dart';
 part 'game_state.g.dart';
 
 abstract class GameState implements Built<GameState, GameStateBuilder> {
+  String get title;
   bool get isLoading;
   bool get isLoaded;
+  bool get isStarted;
   bool get isFinished;
   BuiltSet<String> get participants;
   BuiltList<BuiltList<GameNode>> get nodes;
@@ -16,9 +18,11 @@ abstract class GameState implements Built<GameState, GameStateBuilder> {
 
   factory GameState.empty() {
     return GameState((b) => b
+      ..title = ''
       ..isLoading = true
       ..isLoaded = false
       ..isFinished = false
+      ..isStarted = false
       ..participants = BuiltSet<String>().toBuilder()
       ..nodes = BuiltList<BuiltList<GameNode>>().toBuilder());
   }
@@ -29,9 +33,11 @@ abstract class GameState implements Built<GameState, GameStateBuilder> {
     nodesLengthHorizontal = 10,
   }) {
     return GameState((b) => b
+      ..title = room.title
       ..isLoading = false
       ..isLoaded = true
       ..isFinished = false
+      ..isStarted = false
       ..participants = BuiltSet<String>(room.participants!).toBuilder()
       ..nodes = BuiltList<BuiltList<GameNode>>(List.generate(
           nodesLengthVertical,

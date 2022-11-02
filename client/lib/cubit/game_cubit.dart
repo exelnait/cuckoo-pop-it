@@ -40,8 +40,12 @@ class GameCubit extends Cubit<GameState> {
           ..whereEqualTo('objectId', roomId);
     roomSubscription = await liveQuery.client.subscribe(roomQuery);
     roomSubscription.on(LiveQueryEvent.update, (value) {
-      emit(state.rebuild((b) => b.participants =
-          BuiltSet<String>(value.get('participants')).toBuilder()));
+      print('Room update');
+      print(value);
+      emit(state.rebuild((b) => b
+        ..isStarted = value.get('isStarted')
+        ..participants =
+            BuiltSet<String>(value.get('participants')).toBuilder()));
     });
 
     _gameEventService.subscription.on(LiveQueryEvent.create, (value) {
@@ -50,11 +54,17 @@ class GameCubit extends Cubit<GameState> {
     });
   }
 
-  void tapNode(int y, int x) async {
-    await AudioPlayer().play(AssetSource('sound.mp3'));
+  Future<void> startGame() async {
+    await _roomService.startGame(room!.objectId!);
+  }
 
-    updateNode(y, x, _authService.user!.objectId!);
-    await _gameEventService.create(room!.objectId!, y, x);
+  void tapNode(int y, int x) async {
+    if (!state.nodes[y][x].isActive) {
+      await AudioPlayer().play(AssetSource('sound.mp3'));
+
+      updateNode(y, x, _authService.user!.objectId!);
+      await _gameEventService.create(room!.objectId!, y, x);
+    }
   }
 
   updateNode(int y, int x, String creatorId) {
@@ -90,5 +100,6 @@ class GameCubit extends Cubit<GameState> {
   dispose() async {
     await _roomService.exitRoom(room!.objectId!);
     liveQuery.client.unSubscribe(roomSubscription);
+    _gameEventService.disposeRoomEventsSubscription();
   }
 }
