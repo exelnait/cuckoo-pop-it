@@ -68,7 +68,9 @@ class _GameViewState extends State<_GameView> {
                                 child: Chip(
                                     label: Text(participant.value.name, style: TextStyle(color: Colors.white),),
                                     backgroundColor: participant.value.color)))
-                            .toList())
+                            .toList()),
+                    const SizedBox(height: 2),
+                    Text('Time: ${state.timerValue}')
                   ],
                 ),
                 SizedBox(height: 20),
@@ -88,11 +90,13 @@ class _GameViewState extends State<_GameView> {
                                       },
                                       value: state.nodes[i][j].isActive),
                                 ))))
-                    : MaterialButton(
-                        child: Text('Start game'),
-                        onPressed: () {
-                          _gameCubit.startGame();
-                        }),
+                    : Center(
+                  child: MaterialButton(
+                      child: Text('Start game'),
+                      onPressed: () {
+                        _gameCubit.startGame();
+                      }),
+                ),
               ],
             );
           }),

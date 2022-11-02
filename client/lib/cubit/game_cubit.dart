@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:audioplayers/audioplayers.dart';
 import 'package:built_collection/built_collection.dart';
 import 'package:client/cubit/game_node_model.dart';
@@ -21,6 +23,7 @@ class GameCubit extends Cubit<GameState> {
 
   Room? room;
   late Subscription roomSubscription;
+  Timer? timer;
 
   Future<void> init(String roomId, int height, int width) async {
     print('game cubit init');
@@ -55,6 +58,10 @@ class GameCubit extends Cubit<GameState> {
 
   Future<void> startGame() async {
     await _roomService.startGame(room!.objectId!);
+
+    timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      emit(state.rebuild((b) => b..timerValue = state.timerValue + 1));
+    });
   }
 
   void tapNode(int y, int x) async {
@@ -71,17 +78,12 @@ class GameCubit extends Cubit<GameState> {
 
     int count = 0;
 
-    print('node tapped ${x} ${y}');
-
     nodes.forEach((row) => row.forEach((node) {
           if (node.isActive) count++;
         }));
 
-    print(count);
-
-    print(nodes.length * nodes.length);
-
     if (count == nodes.length * nodes.length - 1) {
+      timer?.cancel();
       print('game finished');
     }
 

@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:client/cubit/game_node_model.dart';
@@ -22,6 +20,7 @@ abstract class GameState implements Built<GameState, GameStateBuilder> {
   BuiltMap<String, Participant> get participants;
 
   BuiltList<BuiltList<GameNode>> get nodes;
+  int get timerValue;
 
   GameState._();
 
@@ -33,6 +32,8 @@ abstract class GameState implements Built<GameState, GameStateBuilder> {
       ..isFinished = false
       ..isStarted = false
       ..participants = BuiltMap<String, Participant>().toBuilder()
+      ..timerValue = 0
+      ..participants = BuiltSet<String>().toBuilder()
       ..nodes = BuiltList<BuiltList<GameNode>>().toBuilder());
   }
 
@@ -51,6 +52,7 @@ abstract class GameState implements Built<GameState, GameStateBuilder> {
               id: id,
               name: Utils.generateUserName(),
               color: Utils.generateColor()) }).toBuilder()
+      ..timerValue = 0
       ..nodes = BuiltList<BuiltList<GameNode>>(List.generate(
           nodesLengthVertical,
           (_) => BuiltList<GameNode>(List.filled(nodesLengthHorizontal, 0)
