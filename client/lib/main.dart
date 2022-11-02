@@ -1,6 +1,5 @@
-import 'package:client/bloc/game_cubit/game_cubit.dart';
+import 'package:client/get_it.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'auth_service.dart';
 import 'screens/login_screen.dart';
@@ -15,15 +14,12 @@ class AppController extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => GameCubit(),
-      child: MaterialApp(
-        title: 'Cuckoo Pop It',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-        ),
-        home: const MyHomePage(title: 'Flutter Demo Home Page'),
+    return MaterialApp(
+      title: 'Cuckoo Pop It',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
       ),
+      home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
 }
@@ -38,14 +34,13 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final _authService = AuthService();
-
   bool isLoading = true;
 
   @override
   void initState() {
     super.initState();
-    _authService
+    setup();
+    getIt<AuthService>()
         .init()
         .then((value) => {
               setState(() {
@@ -68,8 +63,8 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
         body: isLoading
             ? const CircularProgressIndicator()
-            : _authService.user == null
-                ? LoginPage(onLogin: _authService.signInGoogle)
+            : getIt<AuthService>().user == null
+                ? LoginPage(onLogin: getIt<AuthService>().signInGoogle)
                 : const MainPage());
   }
 }

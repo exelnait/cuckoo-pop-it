@@ -1,8 +1,10 @@
 import 'dart:math';
 
 import 'package:client/auth_service.dart';
+import 'package:client/bloc/game_cubit/game_cubit.dart';
 import 'package:client/extentions.dart';
 import 'package:client/get_it.dart';
+import 'package:client/screens/game_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
 import 'package:username_gen/username_gen.dart';
@@ -19,10 +21,16 @@ class RoomsList extends StatelessWidget {
     var room = ParseObject('Room')
       ..set('title', UsernameGen().generate())
       ..set('creatorId', currentUser.objectId)
-      ..set('color',
-          Color((Random().nextDouble() * 0xFFFFFF).toInt()).withOpacity(1.0))
+      // ..set('color',
+      //     Color((Random().nextDouble() * 0xFFFFFF).toInt()).withOpacity(1.0))
       ..setAddUnique('participants', currentUser.objectId);
     await room.save();
+  }
+
+  openGame(context) {
+    getIt<GameCubit>().init(5, 5);
+    Navigator.of(context).push(
+        MaterialPageRoute(builder: (context) => const GameScreen()));
   }
 
   @override
@@ -30,7 +38,7 @@ class RoomsList extends StatelessWidget {
     return Container(
       child: Column(
         children: [
-          MaterialButton(onPressed: createRoom),
+          MaterialButton(onPressed: createRoom, child: Text('Create room')),
           ParseLiveListWidget<ParseObject>(
             shrinkWrap: true,
             query: query,
@@ -42,16 +50,17 @@ class RoomsList extends StatelessWidget {
               } else if (snapshot.hasData) {
                 print(snapshot.loadedData);
                 return ListTile(
-                  leading: Container(
-                    decoration: BoxDecoration(
-                        color:
-                            HexColor.fromHex(snapshot.loadedData?.get('color')),
-                        shape: BoxShape.circle),
-                  ),
+                  // leading: Container(
+                  //   decoration: BoxDecoration(
+                  //       color:
+                  //           HexColor.fromHex(snapshot.loadedData?.get('color')),
+                  //       shape: BoxShape.circle),
+                  // ),
                   dense: true,
                   title: Text(
                     snapshot.loadedData?.get("title"),
                   ),
+                  onTap: () => openGame(context),
                   subtitle: Text(
                       'Participants: ${snapshot.loadedData?.get("participants").length}'),
                 );

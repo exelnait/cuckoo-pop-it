@@ -1,11 +1,8 @@
-import 'package:client/bloc/game_cubit/game_cubit.dart';
-import 'package:client/screens/game_screen.dart';
+
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
 
 import '../components/rooms_list.dart';
-import '../get_it.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
@@ -19,7 +16,6 @@ class _MainPageState extends State<MainPage> {
   void initState() {
     super.initState();
     init();
-    setup();
   }
 
   init() async {
