@@ -66,6 +66,7 @@ class _GameViewState extends State<_GameView> {
                                     children: List.generate(
                                   state.nodes[i].length,
                                   (j) => Node(
+                                      color: Colors.green,
                                       onTap: () {
                                         _gameCubit.tapNode(i, j);
                                       },

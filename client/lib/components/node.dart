@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:rive/rive.dart';
 
 class Node extends StatefulWidget {
-  const Node({required this.value, required this.onTap, super.key});
+  const Node({required this.value, required this.onTap, this.color, super.key});
 
   final bool value;
   final VoidCallback onTap;
+  final Color? color;
 
   @override
   State<Node> createState() => _NodeState();
@@ -31,6 +32,10 @@ class _NodeState extends State<Node> {
         width: 50,
         alignment: Alignment.center,
         margin: const EdgeInsets.all(5),
+        decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            border: Border.all(
+                color: widget.color ?? Colors.transparent, width: 2)),
         child: GestureDetector(
           onTap: () {
             widget.onTap();
