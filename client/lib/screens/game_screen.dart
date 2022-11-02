@@ -53,7 +53,7 @@ class _GameViewState extends State<_GameView> {
                         state.nodes[i].length,
                         (j) => Node(
                             onTap: () {
-                              context.read<GameCubit>().tapNode(i, j);
+                              getIt<GameCubit>().tapNode(i, j);
                             },
                             value: state.nodes[i][j]),
                       )))),
