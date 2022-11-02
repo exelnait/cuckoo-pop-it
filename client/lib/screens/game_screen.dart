@@ -41,25 +41,32 @@ class _GameViewState extends State<_GameView> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<GameCubit, GameState>(bloc: getIt<GameCubit>(), builder: (context, state) {
-      return Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Center(
-              child: ListView.builder(
-                  itemCount: state.nodes.length,
-                  shrinkWrap: true,
-                  itemBuilder: (context, i) => Row(
-                          children: List.generate(
-                        state.nodes[i].length,
-                        (j) => Node(
-                            onTap: () {
-                              context.read<GameCubit>().tapNode(i, j);
-                            },
-                            value: state.nodes[i][j].isActive ? 1 : 0),
-                      )))),
-        ],
-      );
-    });
+    return BlocBuilder<GameCubit, GameState>(
+        bloc: getIt<GameCubit>(),
+        builder: (context, state) {
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Center(
+                  child: ListView.builder(
+                      itemCount: state.nodes.length,
+                      shrinkWrap: true,
+                      itemBuilder: (context, i) => Row(
+                              children:
+                                  List.generate(state.nodes[i].length, (j) {
+                            return Node(
+                                onTap: () {
+                                  print('node tapped');
+
+                                  print(i);
+                                  print(j);
+
+                                  getIt<GameCubit>().tapNode(i, j);
+                                },
+                                value: state.nodes[i][j].isActive ? 1 : 0);
+                          })))),
+            ],
+          );
+        });
   }
 }

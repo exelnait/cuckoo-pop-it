@@ -1,4 +1,3 @@
-
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 
@@ -11,8 +10,6 @@ abstract class GameNode implements Built<GameNode, GameNodeBuilder> {
   GameNode._();
 
   factory GameNode.init() {
-    print('GameNode init');
-
     return GameNode((b) => b
       ..isActive = false
       ..userId = null);

@@ -33,6 +33,7 @@ class _NodeState extends State<Node> {
         margin: const EdgeInsets.all(5),
         child: GestureDetector(
           onTap: () {
+            widget.onTap();
             _hitNode();
           },
           child: ClipRRect(
