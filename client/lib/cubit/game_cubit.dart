@@ -1,4 +1,4 @@
-import 'package:built_collection/built_collection.dart';
+import 'package:audioplayers/audioplayers.dart';
 import 'package:built_collection/built_collection.dart';
 import 'package:client/cubit/game_node_model.dart';
 import 'package:client/services/room_service.dart';
@@ -12,6 +12,10 @@ final LiveQuery liveQuery = LiveQuery();
 class GameCubit extends Cubit<GameState> {
   GameCubit() : super(GameState.empty());
 
+  final AudioPlayer player = AudioPlayer();
+
+  static const String filePath = 'sound.mp3';
+
   final _roomService = RoomService();
 
   Room? room;
@@ -22,20 +26,27 @@ class GameCubit extends Cubit<GameState> {
 
     room = await _roomService.getRoom(roomId);
 
-    emit(GameState.init(room: room!, nodesLengthVertical: height, nodesLengthHorizontal: width));
+    emit(GameState.init(
+        room: room!,
+        nodesLengthVertical: height,
+        nodesLengthHorizontal: width));
 
     QueryBuilder<ParseObject> roomQuery =
-      QueryBuilder<ParseObject>(ParseObject('Room'))..whereEqualTo('objectId', roomId);
+        QueryBuilder<ParseObject>(ParseObject('Room'))
+          ..whereEqualTo('objectId', roomId);
     roomSubscription = await liveQuery.client.subscribe(roomQuery);
     roomSubscription.on(LiveQueryEvent.update, (value) {
       print('*** UPDATE ***: ${DateTime.now().toString()}\n $value ');
       print((value as ParseObject).objectId);
 
-      emit(state.rebuild((b) => b.participants = BuiltSet<String>(value.get('participants')).toBuilder()));
+      emit(state.rebuild((b) => b.participants =
+          BuiltSet<String>(value.get('participants')).toBuilder()));
     });
   }
 
   void tapNode(int y, int x) {
+    // player.play(AssetSource('assets/sound.mp3'));
+
     BuiltList<BuiltList<GameNode>> nodes = state.nodes;
 
     BuiltList<GameNode> updatedRow = (state.nodes[y].toList()

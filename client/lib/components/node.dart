@@ -22,10 +22,10 @@ class _NodeState extends State<Node> {
     _node = controller.findInput<bool>('PRessed') as SMIBool;
   }
 
-  void _hitNode() => _node?.change(true);
-
   @override
   Widget build(BuildContext context) {
+    _node?.change(widget.value);
+
     return Container(
         height: 50,
         width: 50,
@@ -34,7 +34,6 @@ class _NodeState extends State<Node> {
         child: GestureDetector(
           onTap: () {
             widget.onTap();
-            _hitNode();
           },
           child: ClipRRect(
               borderRadius: BorderRadius.circular(50),
