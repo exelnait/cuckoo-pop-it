@@ -1,0 +1,8 @@
+{
+    "appId": "zZc3kXA5JWnzVD4I12I5vTz8hdf9rDcRyEv9iYkg",
+    "masterKey": "Z0UlkHxtaXBwuu36db3gNpLZjA3189ZPvLnglWGr",
+    "appName": "Parse Test",
+    "cloud": "./cloud/main",
+    "databaseURI": "mongodb+srv://master:swine4PASSOVER9esthete@cluster0.2npxth4.mongodb.net/?retryWrites=true&w=majority",
+    "clientKey": "123"
+}

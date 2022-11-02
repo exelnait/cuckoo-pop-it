@@ -1,0 +1,15 @@
+{"level":"info","message":"Parse LiveQuery Server starts running","timestamp":"2022-11-01T13:09:03.154Z"}
+{"level":"info","message":"Create new client: 5535108e-38d2-4ea6-bbef-5853c40fc362","timestamp":"2022-11-01T13:53:57.129Z"}
+{"level":"info","message":"Client disconnect: 5535108e-38d2-4ea6-bbef-5853c40fc362","timestamp":"2022-11-01T13:53:58.549Z"}
+{"level":"info","message":"Create new client: 6b97090b-4f75-452f-b616-adec1fb2017f","timestamp":"2022-11-01T13:53:59.996Z"}
+{"level":"info","message":"Create new client: 473ed24c-6adc-4884-ab7c-c95702410fb7","timestamp":"2022-11-01T13:54:30.390Z"}
+{"level":"info","message":"Client disconnect: 473ed24c-6adc-4884-ab7c-c95702410fb7","timestamp":"2022-11-01T13:54:32.348Z"}
+{"level":"info","message":"Client disconnect: 6b97090b-4f75-452f-b616-adec1fb2017f","timestamp":"2022-11-01T13:54:32.349Z"}
+{"level":"info","message":"Create new client: 3da98122-48af-4a53-94f7-131c8702d510","timestamp":"2022-11-01T13:54:34.123Z"}
+{"level":"info","message":"Parse LiveQuery Server starts running","timestamp":"2022-11-01T13:54:59.017Z"}
+{"level":"info","message":"Create new client: e7476be6-213b-4f70-982e-a3a0a0745162","timestamp":"2022-11-01T13:55:03.482Z"}
+{"level":"info","message":"Parse LiveQuery Server starts running","timestamp":"2022-11-01T14:31:47.041Z"}
+{"level":"info","message":"Create new client: eafb667e-4033-45a1-a1bf-583c67217cbf","timestamp":"2022-11-01T14:31:59.664Z"}
+{"level":"info","message":"Client disconnect: eafb667e-4033-45a1-a1bf-583c67217cbf","timestamp":"2022-11-01T14:34:37.901Z"}
+{"level":"info","message":"Create new client: cf06b2a4-f7f9-4c75-9410-fb8cd8593199","timestamp":"2022-11-01T14:34:37.990Z"}
+{"level":"info","message":"Client disconnect: cf06b2a4-f7f9-4c75-9410-fb8cd8593199","timestamp":"2022-11-01T14:34:38.027Z"}
