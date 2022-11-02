@@ -48,6 +48,7 @@ class _GameViewState extends State<_GameView> {
       child: BlocBuilder<GameCubit, GameState>(
           bloc: _gameCubit,
           builder: (context, state) {
+            print(state.participants);
             return Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [

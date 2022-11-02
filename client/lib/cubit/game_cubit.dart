@@ -44,8 +44,7 @@ class GameCubit extends Cubit<GameState> {
       print(value);
       emit(state.rebuild((b) => b
         ..isStarted = value.get('isStarted')
-        ..participants =
-            BuiltSet<String>(value.get('participants')).toBuilder()));
+        ..participants = GameState.getParticipants(state.participants, value.get('participants')).toBuilder()));
     });
 
     _gameEventService.subscription.on(LiveQueryEvent.create, (value) {
