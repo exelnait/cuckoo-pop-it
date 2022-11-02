@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:client/cubit/game_node_model.dart';
@@ -33,7 +35,6 @@ abstract class GameState implements Built<GameState, GameStateBuilder> {
       ..isStarted = false
       ..participants = BuiltMap<String, Participant>().toBuilder()
       ..timerValue = 0
-      ..participants = BuiltSet<String>().toBuilder()
       ..nodes = BuiltList<BuiltList<GameNode>>().toBuilder());
   }
 

@@ -7,7 +7,7 @@ import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
 
 final LiveQuery liveQuery = LiveQuery();
 QueryBuilder<ParseObject> query =
-    QueryBuilder<ParseObject>(ParseObject('Room'));
+    QueryBuilder<ParseObject>(ParseObject('Room'))..whereEqualTo('isStarted', false);
 
 class RoomsList extends StatelessWidget {
   RoomsList({super.key});
