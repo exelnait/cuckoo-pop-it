@@ -3,7 +3,7 @@
   "description": "Cuckoo Pop-it game for hackathon",
   "scripts": {
     "app": "flutter run -d chrome --web-port 7357",
-    "start": "node indes.js",
+    "start": "node index.js",
       "dashboard": "parse-dashboard --dev --appId zZc3kXA5JWnzVD4I12I5vTz8hdf9rDcRyEv9iYkg --masterKey Z0UlkHxtaXBwuu36db3gNpLZjA3189ZPvLnglWGr --serverURL 'http://localhost:1337/parse' --appName 'Parse Test'"
   },
   "dependencies": {
