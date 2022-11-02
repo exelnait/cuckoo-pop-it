@@ -60,7 +60,7 @@ abstract class GameState implements Built<GameState, GameStateBuilder> {
 
   factory GameState([void Function(GameStateBuilder) updates]) = _$GameState;
 
-  static BuiltMap<String, Participant> getParticipants(BuiltMap<String, Participant>  oldParticipants, List<String> newParticipants) {
+  static BuiltMap<String, Participant> getParticipants(BuiltMap<String, Participant>  oldParticipants, List<dynamic> newParticipants) {
     return BuiltMap<String, Participant>(Map.fromIterable(newParticipants, key: (id) => id, value: (v) {
     if (oldParticipants.containsKey(v)) {
         return oldParticipants[v]!;

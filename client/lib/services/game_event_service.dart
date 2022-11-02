@@ -7,7 +7,7 @@ final LiveQuery liveQuery = LiveQuery();
 class GameEventService {
   final _authService = getIt<AuthService>();
 
-  late final Subscription subscription;
+  Subscription? subscription;
 
   String get _myUserId {
     return _authService.user!.objectId!;
@@ -17,12 +17,16 @@ class GameEventService {
     QueryBuilder<ParseObject> query = QueryBuilder<ParseObject>(GameEvent())
       ..whereEqualTo('roomId', roomId)
       ..whereNotEqualTo('creatorId', _myUserId);
+    disposeRoomEventsSubscription();
     subscription = await liveQuery.client.subscribe(query);
     return subscription;
   }
 
   disposeRoomEventsSubscription() {
-    liveQuery.client.unSubscribe(subscription);
+    if (subscription != null) {
+      liveQuery.client.unSubscribe(subscription!);
+    }
+
   }
 
   Future<GameEvent> create(roomId, x, y) async {

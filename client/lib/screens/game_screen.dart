@@ -62,12 +62,12 @@ class _GameViewState extends State<_GameView> {
                   children: [
                     Text('Participants: ${state.participants.length}'),
                     Column(
-                        children: state.participants
+                        children: state.participants.entries
                             .map((participant) => Container(
                                 margin: const EdgeInsets.only(top: 5),
                                 child: Chip(
-                                    label: Text(participant),
-                                    backgroundColor: Colors.red)))
+                                    label: Text(participant.value.name, style: TextStyle(color: Colors.white),),
+                                    backgroundColor: participant.value.color)))
                             .toList())
                   ],
                 ),
@@ -82,7 +82,7 @@ class _GameViewState extends State<_GameView> {
                                 children: List.generate(
                                   state.nodes[i].length,
                                   (j) => Node(
-                                      color: Colors.green,
+                                      color: state.participants[state.nodes[i][j].userId]?.color,
                                       onTap: () {
                                         _gameCubit.tapNode(i, j);
                                       },

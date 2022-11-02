@@ -47,7 +47,7 @@ class GameCubit extends Cubit<GameState> {
         ..participants = GameState.getParticipants(state.participants, value.get('participants')).toBuilder()));
     });
 
-    _gameEventService.subscription.on(LiveQueryEvent.create, (value) {
+    _gameEventService.subscription!.on(LiveQueryEvent.create, (value) {
       print('Game event update');
       updateNode(value.get('y'), value.get('x'), value.get('creatorId'));
     });
