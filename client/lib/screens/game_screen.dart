@@ -1,5 +1,5 @@
-import 'package:client/cubit/game_cubit.dart';
 import 'package:client/components/node.dart';
+import 'package:client/cubit/game_cubit.dart';
 import 'package:client/cubit/game_state.dart';
 import 'package:client/get_it.dart';
 import 'package:client/screens/finish_screen.dart';
@@ -57,58 +57,56 @@ class _GameViewState extends State<_GameView> {
           },
           bloc: _gameCubit,
           builder: (context, state) {
-            return Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child:
-                        Text(state.title, style: const TextStyle(fontSize: 20)),
-                  ),
-                  Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Text('Participants: ${state.participants.length}'),
-                      Column(
-                          children: state.participants
-                              .map((participant) => Container(
-                                  margin: const EdgeInsets.only(top: 5),
-                                  child: Chip(
-                                      label: Text(participant),
-                                      backgroundColor: Colors.red)))
-                              .toList()),
-                      const SizedBox(height: 2),
-                      Text('Time: ${state.timerValue}')
-                    ],
-                  ),
-                  SizedBox(height: 20),
-                  state.isStarted
-                      ? Center(
-                          child: ListView.builder(
-                              itemCount: state.nodes.length,
-                              shrinkWrap: true,
-                              itemBuilder: (context, i) => Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: List.generate(
-                                    state.nodes[i].length,
-                                    (j) => Node(
-                                        color: Colors.green,
-                                        onTap: () {
-                                          _gameCubit.tapNode(i, j);
-                                        },
-                                        value: state.nodes[i][j].isActive),
-                                  ))))
-                      : Center(
-                          child: MaterialButton(
-                              child: Text('Start game'),
-                              onPressed: () {
-                                _gameCubit.startGame();
-                              }),
-                        ),
-                ],
-              ),
+            print(state.participants);
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child:
+                      Text(state.title, style: const TextStyle(fontSize: 20)),
+                ),
+                Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text('Participants: ${state.participants.length}'),
+                    Column(
+                        children: state.participants.entries
+                            .map((participant) => Container(
+                                margin: const EdgeInsets.only(top: 5),
+                                child: Chip(
+                                    label: Text(participant.value.name, style: TextStyle(color: Colors.white),),
+                                    backgroundColor: participant.value.color)))
+                            .toList()),
+                    const SizedBox(height: 2),
+                    Text('Time: ${state.timerValue}')
+                  ],
+                ),
+                SizedBox(height: 20),
+                state.isStarted
+                    ? Center(
+                        child: ListView.builder(
+                            itemCount: state.nodes.length,
+                            shrinkWrap: true,
+                            itemBuilder: (context, i) => Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: List.generate(
+                                  state.nodes[i].length,
+                                  (j) => Node(
+                                      color: state.participants[state.nodes[i][j].userId]?.color,
+                                      onTap: () {
+                                        _gameCubit.tapNode(i, j);
+                                      },
+                                      value: state.nodes[i][j].isActive),
+                                ))))
+                    : Center(
+                  child: MaterialButton(
+                      child: Text('Start game'),
+                      onPressed: () {
+                        _gameCubit.startGame();
+                      }),
+                ),
+              ],
             );
           }),
     );

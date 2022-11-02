@@ -1,5 +1,5 @@
-import 'package:client/services/auth_service.dart';
 import 'package:client/get_it.dart';
+import 'package:client/services/auth_service.dart';
 import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
 
 final LiveQuery liveQuery = LiveQuery();
@@ -7,7 +7,7 @@ final LiveQuery liveQuery = LiveQuery();
 class GameEventService {
   final _authService = getIt<AuthService>();
 
-  late final Subscription subscription;
+  Subscription? subscription;
 
   String get _myUserId {
     return _authService.user!.objectId!;
@@ -15,13 +15,18 @@ class GameEventService {
 
   initRoomEventsSubscription(roomId) async {
     QueryBuilder<ParseObject> query = QueryBuilder<ParseObject>(GameEvent())
-      ..whereEqualTo('roomId', roomId)..whereNotEqualTo('creatorId', _myUserId);
+      ..whereEqualTo('roomId', roomId)
+      ..whereNotEqualTo('creatorId', _myUserId);
+    disposeRoomEventsSubscription();
     subscription = await liveQuery.client.subscribe(query);
     return subscription;
   }
 
   disposeRoomEventsSubscription() {
-    liveQuery.client.unSubscribe(subscription);
+    if (subscription != null) {
+      liveQuery.client.unSubscribe(subscription!);
+    }
+
   }
 
   Future<GameEvent> create(roomId, x, y) async {
@@ -47,14 +52,18 @@ class GameEvent extends ParseObject implements ParseCloneable {
   static const String keyTableName = 'GameEvent';
 
   int? get x => get<int?>('x');
+
   set x(int? x) => set<int?>('x', x);
 
   int? get y => get<int?>('y');
+
   set y(int? y) => set<int?>('y', y);
 
   String? get roomId => get<String?>('roomId');
+
   set roomId(String? roomId) => set<String?>('roomId', roomId);
 
   String? get creatorId => get<String?>('creatorId');
+
   set creatorId(String? creatorId) => set<String?>('creatorId', creatorId);
 }
