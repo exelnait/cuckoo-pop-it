@@ -21,8 +21,8 @@ class RoomsList extends StatelessWidget {
 
   openGame(roomId, context) async {
     await getIt<GameCubit>().init(roomId, 5, 5);
-    Navigator.of(context).push(
-        MaterialPageRoute(builder: (context) => const GameScreen()));
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (context) => const GameScreen()));
   }
 
   @override
@@ -30,9 +30,11 @@ class RoomsList extends StatelessWidget {
     return Container(
       child: Column(
         children: [
-          MaterialButton(onPressed: () {
-            createRoom(context);
-          }, child: Text('Create game')),
+          MaterialButton(
+              onPressed: () {
+                createRoom(context);
+              },
+              child: Text('Create game')),
           SizedBox(height: 20),
           ParseLiveListWidget<ParseObject>(
             shrinkWrap: true,
@@ -55,13 +57,13 @@ class RoomsList extends StatelessWidget {
                   title: Text(
                     snapshot.loadedData?.get("title"),
                   ),
-                  onTap:  () {
+                  onTap: () {
                     if (!snapshot.loadedData?.get("isStarted")) {
                       openGame(snapshot.loadedData?.objectId, context);
                     }
                   },
                   subtitle: Text(
-                      '${snapshot.loadedData?.get("isStarted") ? 'Started. ': ''}Participants: ${snapshot.loadedData?.get("participants").length}'),
+                      '${snapshot.loadedData?.get("isStarted") ? 'Started. ' : ''}Participants: ${snapshot.loadedData?.get("participants").length}'),
                 );
               } else {
                 return const ListTile(

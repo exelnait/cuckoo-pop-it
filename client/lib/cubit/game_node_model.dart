@@ -1,10 +1,10 @@
-import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 
 part 'game_node_model.g.dart';
 
 abstract class GameNode implements Built<GameNode, GameNodeBuilder> {
   bool get isActive;
+
   String? get userId;
 
   GameNode._();

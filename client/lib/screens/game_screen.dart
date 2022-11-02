@@ -1,5 +1,5 @@
-import 'package:client/cubit/game_cubit.dart';
 import 'package:client/components/node.dart';
+import 'package:client/cubit/game_cubit.dart';
 import 'package:client/cubit/game_state.dart';
 import 'package:client/get_it.dart';
 import 'package:flutter/material.dart';
@@ -57,21 +57,25 @@ class _GameViewState extends State<_GameView> {
                 ),
                 Text('Participants: ${state.participants.length}'),
                 SizedBox(height: 20),
-                state.isStarted ? Center(
-                    child: ListView.builder(
-                        itemCount: state.nodes.length,
-                        shrinkWrap: true,
-                        itemBuilder: (context, i) => Row(
-                                children: List.generate(
-                              state.nodes[i].length,
-                              (j) => Node(
-                                  onTap: () {
-                                    _gameCubit.tapNode(i, j);
-                                  },
-                                  value: state.nodes[i][j].isActive),
-                            )))) : MaterialButton(child: Text('Start game'), onPressed: () {
-                  _gameCubit.startGame();
-                }),
+                state.isStarted
+                    ? Center(
+                        child: ListView.builder(
+                            itemCount: state.nodes.length,
+                            shrinkWrap: true,
+                            itemBuilder: (context, i) => Row(
+                                    children: List.generate(
+                                  state.nodes[i].length,
+                                  (j) => Node(
+                                      onTap: () {
+                                        _gameCubit.tapNode(i, j);
+                                      },
+                                      value: state.nodes[i][j].isActive),
+                                ))))
+                    : MaterialButton(
+                        child: Text('Start game'),
+                        onPressed: () {
+                          _gameCubit.startGame();
+                        }),
               ],
             );
           }),

@@ -17,11 +17,13 @@ class AuthService {
       scopes: ['email', 'https://www.googleapis.com/auth/contacts.readonly']);
 
   Future<void> init() async {
-    await Parse().initialize(appId, appUrl,
-        clientKey: keyParseClientKey,
-        debug: true,
-        liveQueryUrl: keyLiveQueryUrl,
-        autoSendSessionId: true,
+    await Parse().initialize(
+      appId,
+      appUrl,
+      clientKey: keyParseClientKey,
+      debug: true,
+      liveQueryUrl: keyLiveQueryUrl,
+      autoSendSessionId: true,
       registeredSubClassMap: <String, ParseObjectConstructor>{
         Room.keyTableName: () => Room(),
         GameEvent.keyTableName: () => GameEvent(),

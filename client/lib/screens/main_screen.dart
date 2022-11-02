@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 import '../components/rooms_list.dart';
@@ -11,7 +10,6 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
-
   @override
   Widget build(BuildContext context) {
     return RoomsList();

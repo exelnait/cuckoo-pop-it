@@ -1,7 +1,7 @@
-import 'package:client/services/auth_service.dart';
 import 'package:client/get_it.dart';
+import 'package:client/services/auth_service.dart';
+import 'package:client/utils.dart';
 import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
-import 'package:username_gen/username_gen.dart';
 
 class RoomService {
   final _authService = getIt<AuthService>();
@@ -12,29 +12,33 @@ class RoomService {
 
   Future<Room> createRoom() async {
     var room = Room()
-      ..title = UsernameGen().generate()
+      ..title = Utils.generateUserName()
       ..creatorId = _myUserId
       ..isStarted = false
       ..participants = [_myUserId];
-    // ..set('color',
-    //     Color((Random().nextDouble() * 0xFFFFFF).toInt()).withOpacity(1.0))
     var response = await room.save();
     print(response.result);
     return room;
   }
 
   participateRoom(roomId) async {
-    var updatedRoom = Room()..objectId = roomId..setAddUnique('participants', _myUserId);
+    var updatedRoom = Room()
+      ..objectId = roomId
+      ..setAddUnique('participants', _myUserId);
     await updatedRoom.save();
   }
 
   startGame(roomId) async {
-    var updatedRoom = Room()..objectId = roomId..set('isStarted', true);
+    var updatedRoom = Room()
+      ..objectId = roomId
+      ..set('isStarted', true);
     await updatedRoom.save();
   }
 
   exitRoom(roomId) async {
-    var updatedRoom = Room()..objectId = roomId..setRemove('participants', _myUserId);
+    var updatedRoom = Room()
+      ..objectId = roomId
+      ..setRemove('participants', _myUserId);
     await updatedRoom.save();
   }
 
@@ -55,15 +59,19 @@ class Room extends ParseObject implements ParseCloneable {
   static const String keyTableName = 'Room';
 
   String? get title => get<String?>('title');
+
   set title(String? title) => set<String?>('title', title);
 
   bool? get isStarted => get<bool?>('isStarted');
+
   set isStarted(bool? isStarted) => set<bool?>('isStarted', isStarted);
 
   String? get creatorId => get<String?>('creatorId');
+
   set creatorId(String? creatorId) => set<String?>('creatorId', creatorId);
 
   List<dynamic>? get participants => get<List<dynamic>>('participants');
+
   set participants(List<dynamic>? participants) =>
       set<List<dynamic>?>('participants', participants);
 }
