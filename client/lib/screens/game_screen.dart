@@ -75,7 +75,10 @@ class _GameViewState extends State<_GameView> {
                             .map((participant) => Container(
                                 margin: const EdgeInsets.only(top: 5),
                                 child: Chip(
-                                    label: Text(participant.value.name, style: TextStyle(color: Colors.white),),
+                                    label: Text(
+                                      participant.value.name,
+                                      style: TextStyle(color: Colors.white),
+                                    ),
                                     backgroundColor: participant.value.color)))
                             .toList()),
                     const SizedBox(height: 2),
@@ -93,19 +96,22 @@ class _GameViewState extends State<_GameView> {
                                 children: List.generate(
                                   state.nodes[i].length,
                                   (j) => Node(
-                                      color: state.participants[state.nodes[i][j].userId]?.color,
+                                      color: state
+                                          .participants[
+                                              state.nodes[i][j].userId]
+                                          ?.color,
                                       onTap: () {
                                         _gameCubit.tapNode(i, j);
                                       },
                                       value: state.nodes[i][j].isActive),
                                 ))))
                     : Center(
-                  child: MaterialButton(
-                      child: Text('Start game'),
-                      onPressed: () {
-                        _gameCubit.startGame();
-                      }),
-                ),
+                        child: MaterialButton(
+                            child: Text('Start game'),
+                            onPressed: () {
+                              _gameCubit.startGame();
+                            }),
+                      ),
               ],
             );
           }),

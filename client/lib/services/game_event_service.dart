@@ -26,7 +26,6 @@ class GameEventService {
     if (subscription != null) {
       liveQuery.client.unSubscribe(subscription!);
     }
-
   }
 
   Future<GameEvent> create(roomId, x, y) async {
