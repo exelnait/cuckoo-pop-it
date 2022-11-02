@@ -28,14 +28,15 @@ class _NodeState extends State<Node> {
     _node?.change(widget.value);
 
     return Container(
-        height: 50,
-        width: 50,
+        height: 75,
+        width: 75,
         alignment: Alignment.center,
         margin: const EdgeInsets.all(5),
+        padding: const EdgeInsets.all(3),
         decoration: BoxDecoration(
             shape: BoxShape.circle,
             border: Border.all(
-                color: widget.color ?? Colors.transparent, width: 2)),
+                color: widget.color ?? Colors.transparent, width: 3)),
         child: GestureDetector(
           onTap: () {
             widget.onTap();
