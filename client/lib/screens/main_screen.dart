@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
 
-final LiveQuery liveQuery = LiveQuery();
-QueryBuilder<ParseObject> query =
-    QueryBuilder<ParseObject>(ParseObject('Room'));
+import '../components/rooms_list.dart';
+import '../get_it.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
@@ -17,6 +16,7 @@ class _MainPageState extends State<MainPage> {
   void initState() {
     super.initState();
     init();
+    setup();
   }
 
   init() async {
@@ -29,19 +29,8 @@ class _MainPageState extends State<MainPage> {
     });
   }
 
-  createEvent() async {
-    var room = ParseObject('Room')..set('Name', 'Test');
-    await room.save();
-  }
-
   @override
   Widget build(BuildContext context) {
-    return Center(
-        child: Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        MaterialButton(child: const Text('Create room'), onPressed: createEvent)
-      ],
-    ));
+    return RoomsList();
   }
 }
