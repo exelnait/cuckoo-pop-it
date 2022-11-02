@@ -13,6 +13,7 @@ abstract class GameState implements Built<GameState, GameStateBuilder> {
   bool get isFinished;
   BuiltSet<String> get participants;
   BuiltList<BuiltList<GameNode>> get nodes;
+  int get timerValue;
 
   GameState._();
 
@@ -23,6 +24,7 @@ abstract class GameState implements Built<GameState, GameStateBuilder> {
       ..isLoaded = false
       ..isFinished = false
       ..isStarted = false
+      ..timerValue = 0
       ..participants = BuiltSet<String>().toBuilder()
       ..nodes = BuiltList<BuiltList<GameNode>>().toBuilder());
   }
@@ -38,6 +40,7 @@ abstract class GameState implements Built<GameState, GameStateBuilder> {
       ..isLoaded = true
       ..isFinished = false
       ..isStarted = false
+      ..timerValue = 0
       ..participants = BuiltSet<String>(room.participants!).toBuilder()
       ..nodes = BuiltList<BuiltList<GameNode>>(List.generate(
           nodesLengthVertical,
