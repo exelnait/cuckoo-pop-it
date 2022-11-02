@@ -69,6 +69,22 @@ class GameCubit extends Cubit<GameState> {
   updateNode(int y, int x, String creatorId) {
     BuiltList<BuiltList<GameNode>> nodes = state.nodes;
 
+    int count = 0;
+
+    print('node tapped ${x} ${y}');
+
+    nodes.forEach((row) => row.forEach((node) {
+          if (node.isActive) count++;
+        }));
+
+    print(count);
+
+    print(nodes.length * nodes.length);
+
+    if (count == nodes.length * nodes.length - 1) {
+      print('game finished');
+    }
+
     BuiltList<GameNode> updatedRow = (state.nodes[y].toList()
           ..removeAt(x)
           ..insert(
@@ -78,15 +94,15 @@ class GameCubit extends Cubit<GameState> {
                 ..userId = creatorId)))
         .toBuiltList();
 
-    print('before');
-    print(state.nodes);
-    print('after');
-    print(state.rebuild((b) => b
-      ..nodes = (nodes.toList()
-            ..removeAt(y)
-            ..insert(y, updatedRow))
-          .toBuiltList()
-          .toBuilder()));
+    // print('before');
+    // print(state.nodes);
+    // print('after');
+    // print(state.rebuild((b) => b
+    //   ..nodes = (nodes.toList()
+    //         ..removeAt(y)
+    //         ..insert(y, updatedRow))
+    //       .toBuiltList()
+    //       .toBuilder()));
 
     emit(state.rebuild((b) => b
       ..nodes = (nodes.toList()

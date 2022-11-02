@@ -27,7 +27,7 @@ class RoomsList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SingleChildScrollView(
       child: Column(
         children: [
           MaterialButton(

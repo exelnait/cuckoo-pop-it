@@ -77,3 +77,35 @@
 {"level":"info","message":"Client disconnect: 9bb21595-fc7c-4244-bf07-8196ee1bda5d","timestamp":"2022-11-02T14:22:52.020Z"}
 {"level":"info","message":"Create new client: 9a1c6d39-9ca1-4cf1-8d29-12bd37b12e3d","timestamp":"2022-11-02T14:23:17.527Z"}
 {"level":"info","message":"Create new client: 9b34291e-bd4c-4932-bf69-8795201b07d4","timestamp":"2022-11-02T14:23:59.049Z"}
+{"level":"info","message":"Client disconnect: 9a1c6d39-9ca1-4cf1-8d29-12bd37b12e3d","timestamp":"2022-11-02T14:31:27.273Z"}
+{"level":"info","message":"Client disconnect: 9b34291e-bd4c-4932-bf69-8795201b07d4","timestamp":"2022-11-02T14:31:27.301Z"}
+{"level":"info","message":"Create new client: 4213dda9-6e30-4d0d-9b90-cefd73f4103a","timestamp":"2022-11-02T14:31:30.468Z"}
+{"level":"info","message":"Create new client: db8fa9d9-0c03-4d34-8f64-871c8d9d9cf0","timestamp":"2022-11-02T14:32:14.654Z"}
+{"level":"error","message":"Can not find subscription with clientId db8fa9d9-0c03-4d34-8f64-871c8d9d9cf0 subscriptionId 3","timestamp":"2022-11-02T14:32:20.628Z"}
+{"level":"error","message":"Can not find subscription with clientId db8fa9d9-0c03-4d34-8f64-871c8d9d9cf0 subscriptionId 2","timestamp":"2022-11-02T14:32:20.631Z"}
+{"level":"info","message":"Create new client: e3fb8e6b-8a5b-469b-b754-d989610c0bcd","timestamp":"2022-11-02T14:32:38.510Z"}
+{"level":"error","message":"Can not find subscription with clientId e3fb8e6b-8a5b-469b-b754-d989610c0bcd subscriptionId 3","timestamp":"2022-11-02T14:32:42.639Z"}
+{"level":"error","message":"Can not find subscription with clientId e3fb8e6b-8a5b-469b-b754-d989610c0bcd subscriptionId 2","timestamp":"2022-11-02T14:32:42.642Z"}
+{"level":"info","message":"Create new client: 8c75f268-58cb-4e3d-8f45-55c33ee535e6","timestamp":"2022-11-02T14:32:50.813Z"}
+{"level":"info","message":"Create new client: 1bc352b5-9789-4447-8cb4-6998a652934d","timestamp":"2022-11-02T14:33:35.140Z"}
+{"level":"info","message":"Create new client: 9beb89d8-951a-4988-8d71-2732e8c00b25","timestamp":"2022-11-02T14:37:19.941Z"}
+{"level":"info","message":"Create new client: baa56284-3945-4a1f-beee-de754efeb9e8","timestamp":"2022-11-02T14:38:25.991Z"}
+{"level":"info","message":"Create new client: 040ee8b8-b3e5-4c31-a982-bb46f92a79e3","timestamp":"2022-11-02T14:39:32.300Z"}
+{"level":"info","message":"Client disconnect: 9beb89d8-951a-4988-8d71-2732e8c00b25","timestamp":"2022-11-02T14:39:53.771Z"}
+{"level":"info","message":"Client disconnect: 8c75f268-58cb-4e3d-8f45-55c33ee535e6","timestamp":"2022-11-02T14:39:53.777Z"}
+{"level":"info","message":"Client disconnect: 040ee8b8-b3e5-4c31-a982-bb46f92a79e3","timestamp":"2022-11-02T14:39:53.777Z"}
+{"level":"info","message":"Client disconnect: e3fb8e6b-8a5b-469b-b754-d989610c0bcd","timestamp":"2022-11-02T14:39:53.778Z"}
+{"level":"info","message":"Client disconnect: baa56284-3945-4a1f-beee-de754efeb9e8","timestamp":"2022-11-02T14:39:53.778Z"}
+{"level":"info","message":"Client disconnect: 4213dda9-6e30-4d0d-9b90-cefd73f4103a","timestamp":"2022-11-02T14:39:53.779Z"}
+{"level":"info","message":"Client disconnect: db8fa9d9-0c03-4d34-8f64-871c8d9d9cf0","timestamp":"2022-11-02T14:39:53.789Z"}
+{"level":"info","message":"Client disconnect: 1bc352b5-9789-4447-8cb4-6998a652934d","timestamp":"2022-11-02T14:39:53.792Z"}
+{"level":"info","message":"Create new client: b43f2810-ab74-40a4-88dd-be4cf5ffea37","timestamp":"2022-11-02T14:39:56.744Z"}
+{"level":"info","message":"Create new client: 2d2f822e-d4aa-41f9-bb76-226033a319ee","timestamp":"2022-11-02T14:40:35.592Z"}
+{"level":"info","message":"Create new client: 9757cd23-4918-442c-aa5d-174525cfb29e","timestamp":"2022-11-02T14:41:47.247Z"}
+{"level":"info","message":"Create new client: a9bbb6f6-2ee3-4840-a208-de78257d7d6a","timestamp":"2022-11-02T14:42:27.660Z"}
+{"level":"info","message":"Client disconnect: 9757cd23-4918-442c-aa5d-174525cfb29e","timestamp":"2022-11-02T14:43:19.882Z"}
+{"level":"info","message":"Client disconnect: 2d2f822e-d4aa-41f9-bb76-226033a319ee","timestamp":"2022-11-02T14:43:19.885Z"}
+{"level":"info","message":"Client disconnect: b43f2810-ab74-40a4-88dd-be4cf5ffea37","timestamp":"2022-11-02T14:43:19.886Z"}
+{"level":"info","message":"Client disconnect: a9bbb6f6-2ee3-4840-a208-de78257d7d6a","timestamp":"2022-11-02T14:43:19.886Z"}
+{"level":"info","message":"Create new client: 61534d6e-22e1-4837-8378-c8e2fe00de8b","timestamp":"2022-11-02T14:43:22.379Z"}
+{"level":"info","message":"Create new client: 93226de1-31c7-4e6c-a0e3-b4c7da5c9a12","timestamp":"2022-11-02T14:44:36.503Z"}
