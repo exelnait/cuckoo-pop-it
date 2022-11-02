@@ -19,7 +19,7 @@ class _NodeState extends State<Node> {
         artboard, 'State Machine 1',
         onStateChange: (machine, event) {});
     artboard.addController(controller!);
-    _node = controller.findInput<bool>('PRessed') as SMIBool;
+    _node = controller.findInput<bool>('Pressed') as SMIBool;
   }
 
   @override
