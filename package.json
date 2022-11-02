@@ -1,6 +1,6 @@
 {
-  "name": "parse-test",
-  "description": "parse-server for Parse Test",
+  "name": "cuckoo-pop-it",
+  "description": "Cuckoo Pop-it game for hackathon",
   "scripts": {
     "app": "flutter run -d chrome --web-port 7357",
     "start": "node indes.js",
