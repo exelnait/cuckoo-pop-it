@@ -1,24 +1,29 @@
+import 'package:client/bloc/game_cubit/game_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'auth_service.dart';
 import 'screens/login_screen.dart';
 import 'screens/main_screen.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const AppController());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class AppController extends StatelessWidget {
+  const AppController({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
+    return BlocProvider(
+      create: (context) => GameCubit(),
+      child: MaterialApp(
+        title: 'Cuckoo Pop It',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        home: const MyHomePage(title: 'Flutter Demo Home Page'),
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
 }

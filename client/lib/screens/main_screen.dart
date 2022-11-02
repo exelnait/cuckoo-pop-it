@@ -1,4 +1,7 @@
+import 'package:client/bloc/game_cubit/game_cubit.dart';
+import 'package:client/screens/game_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
 
 import '../components/rooms_list.dart';
@@ -27,6 +30,11 @@ class _MainPageState extends State<MainPage> {
       print((value as ParseObject).updatedAt);
       print((value as ParseObject).createdAt);
     });
+  }
+
+  createEvent() async {
+    var room = ParseObject('Room')..set('Name', 'Test');
+    await room.save();
   }
 
   @override
