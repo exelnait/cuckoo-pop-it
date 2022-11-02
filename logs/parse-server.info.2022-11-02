@@ -39,3 +39,6 @@
 {"level":"info","message":"Client disconnect: 678c59ad-b193-49ce-b9e6-0c4b9444ccc8","timestamp":"2022-11-02T09:46:29.877Z"}
 {"level":"info","message":"Create new client: c504a60d-2e70-4a95-8b6c-b45562034485","timestamp":"2022-11-02T09:46:31.436Z"}
 {"level":"info","message":"Create new client: df96780d-16a1-428e-bc6a-b1890264d13f","timestamp":"2022-11-02T09:46:56.185Z"}
+{"level":"info","message":"Client disconnect: df96780d-16a1-428e-bc6a-b1890264d13f","timestamp":"2022-11-02T09:48:29.998Z"}
+{"level":"info","message":"Client disconnect: c504a60d-2e70-4a95-8b6c-b45562034485","timestamp":"2022-11-02T09:48:30.001Z"}
+{"level":"info","message":"Create new client: d076916e-c43b-41e1-b766-e52cd8ea1bcd","timestamp":"2022-11-02T09:48:32.823Z"}
