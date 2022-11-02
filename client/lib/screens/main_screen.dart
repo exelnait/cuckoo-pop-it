@@ -1,4 +1,7 @@
+import 'package:client/bloc/game_cubit/game_cubit.dart';
+import 'package:client/screens/game_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
 
 final LiveQuery liveQuery = LiveQuery();
@@ -40,7 +43,15 @@ class _MainPageState extends State<MainPage> {
         child: Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        MaterialButton(child: const Text('Create room'), onPressed: createEvent)
+        MaterialButton(
+            child: const Text('Create room'), onPressed: createEvent),
+        MaterialButton(
+            child: const Text('Game screen'),
+            onPressed: () {
+              context.read<GameCubit>().init(5, 5);
+              Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => const GameScreen()));
+            })
       ],
     ));
   }
