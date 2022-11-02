@@ -1,3 +1,4 @@
+import 'package:client/services/room_service.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
 
@@ -19,7 +20,11 @@ class AuthService {
         clientKey: keyParseClientKey,
         debug: true,
         liveQueryUrl: keyLiveQueryUrl,
-        autoSendSessionId: true);
+        autoSendSessionId: true,
+      registeredSubClassMap: <String, ParseObjectConstructor>{
+        Room.keyTableName: () => Room(),
+      },
+    );
     await getCurrentUser();
   }
 

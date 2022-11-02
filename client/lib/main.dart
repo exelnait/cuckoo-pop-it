@@ -1,7 +1,7 @@
 import 'package:client/get_it.dart';
 import 'package:flutter/material.dart';
 
-import 'auth_service.dart';
+import 'services/auth_service.dart';
 import 'screens/login_screen.dart';
 import 'screens/main_screen.dart';
 

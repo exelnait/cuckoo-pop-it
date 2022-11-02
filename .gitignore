@@ -1,5 +1,9 @@
 node_modules
 
+
+*.g.dart
+
+
 # Miscellaneous
 *.class
 *.lock
