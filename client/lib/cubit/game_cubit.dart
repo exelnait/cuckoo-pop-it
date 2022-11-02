@@ -15,10 +15,6 @@ final LiveQuery liveQuery = LiveQuery();
 class GameCubit extends Cubit<GameState> {
   GameCubit() : super(GameState.empty());
 
-  final AudioPlayer player = AudioPlayer();
-
-  static const String filePath = 'sound.mp3';
-
   final _authService = getIt<AuthService>();
   final _roomService = getIt<RoomService>();
   final _gameEventService = getIt<GameEventService>();
@@ -46,7 +42,10 @@ class GameCubit extends Cubit<GameState> {
     roomSubscription.on(LiveQueryEvent.update, (value) {
       print('Room update');
       print(value);
-      emit(state.rebuild((b) => b..isStarted = value.get('isStarted')..participants = BuiltSet<String>(value.get('participants')).toBuilder()));
+      emit(state.rebuild((b) => b
+        ..isStarted = value.get('isStarted')
+        ..participants =
+            BuiltSet<String>(value.get('participants')).toBuilder()));
     });
 
     _gameEventService.subscription.on(LiveQueryEvent.create, (value) {
@@ -61,6 +60,8 @@ class GameCubit extends Cubit<GameState> {
 
   void tapNode(int y, int x) async {
     if (!state.nodes[y][x].isActive) {
+      await AudioPlayer().play(AssetSource('sound.mp3'));
+
       updateNode(y, x, _authService.user!.objectId!);
       await _gameEventService.create(room!.objectId!, x, y);
     }
