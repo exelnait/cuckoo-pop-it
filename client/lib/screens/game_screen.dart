@@ -57,21 +57,26 @@ class _GameViewState extends State<_GameView> {
                 ),
                 Text('Participants: ${state.participants.length}'),
                 SizedBox(height: 20),
-                state.isStarted ? Center(
-                    child: ListView.builder(
-                        itemCount: state.nodes.length,
-                        shrinkWrap: true,
-                        itemBuilder: (context, i) => Row(
-                                children: List.generate(
-                              state.nodes[i].length,
-                              (j) => Node(
-                                  onTap: () {
-                                    _gameCubit.tapNode(i, j);
-                                  },
-                                  value: state.nodes[i][j].isActive),
-                            )))) : MaterialButton(child: Text('Start game'), onPressed: () {
-                  _gameCubit.startGame();
-                }),
+                state.isStarted
+                    ? Center(
+                        child: ListView.builder(
+                            itemCount: state.nodes.length,
+                            shrinkWrap: true,
+                            itemBuilder: (context, i) => Row(
+                                    children: List.generate(
+                                  state.nodes[i].length,
+                                  (j) => Node(
+                                      color: Colors.green,
+                                      onTap: () {
+                                        _gameCubit.tapNode(i, j);
+                                      },
+                                      value: state.nodes[i][j].isActive),
+                                ))))
+                    : MaterialButton(
+                        child: Text('Start game'),
+                        onPressed: () {
+                          _gameCubit.startGame();
+                        }),
               ],
             );
           }),
