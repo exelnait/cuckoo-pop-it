@@ -32,11 +32,12 @@ class RoomsList extends StatelessWidget {
     return SingleChildScrollView(
       child: Column(
         children: [
-          AnimatedButton(
-            onTap: () {
-              createRoom(context);
-            },
-          ),
+          MaterialButton(
+              onPressed: () {
+                createRoom(context);
+              },
+              child: Text('Create game')),
+          SizedBox(height: 20),
           ParseLiveListWidget<ParseObject>(
             shrinkWrap: true,
             query: query,

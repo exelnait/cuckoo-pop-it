@@ -1,3 +1,4 @@
+import 'package:client/components/button.dart';
 import 'package:client/components/node.dart';
 import 'package:client/cubit/game_cubit.dart';
 import 'package:client/cubit/game_state.dart';
@@ -106,11 +107,11 @@ class _GameViewState extends State<_GameView> {
                                       value: state.nodes[i][j].isActive),
                                 ))))
                     : Center(
-                        child: MaterialButton(
-                            child: Text('Start game'),
-                            onPressed: () {
-                              _gameCubit.startGame();
-                            }),
+                        child: AnimatedButton(
+                          onTap: () {
+                            _gameCubit.startGame();
+                          },
+                        ),
                       ),
               ],
             );
