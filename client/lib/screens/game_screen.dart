@@ -31,14 +31,6 @@ class _GameViewState extends State<_GameView> {
     // loadFile();
   }
 
-  // Future<void> loadFile() async {
-  //   final ByteData data = await rootBundle.load('assets/rive/animation.riv');
-
-  //   setState(() {
-  //     animationFile = data;
-  //   });
-  // }
-
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<GameCubit, GameState>(
@@ -56,14 +48,9 @@ class _GameViewState extends State<_GameView> {
                                   List.generate(state.nodes[i].length, (j) {
                             return Node(
                                 onTap: () {
-                                  print('node tapped');
-
-                                  print(i);
-                                  print(j);
-
                                   getIt<GameCubit>().tapNode(i, j);
                                 },
-                                value: state.nodes[i][j].isActive ? 1 : 0);
+                                value: state.nodes[i][j].isActive);
                           })))),
             ],
           );

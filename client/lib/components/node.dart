@@ -4,7 +4,7 @@ import 'package:rive/rive.dart';
 class Node extends StatefulWidget {
   const Node({required this.value, required this.onTap, super.key});
 
-  final int value;
+  final bool value;
   final VoidCallback onTap;
 
   @override

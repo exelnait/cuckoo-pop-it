@@ -37,19 +37,18 @@ class GameCubit extends Cubit<GameState> {
   void tapNode(int y, int x) {
     BuiltList<BuiltList<GameNode>> nodes = state.nodes;
 
-    BuiltList<GameNode> row = state.nodes[y];
-
-    GameNode node = nodes[y][x];
+    BuiltList<GameNode> updatedRow = (state.nodes[y].toList()
+          ..removeAt(x)
+          ..insert(
+              x,
+              state.nodes[y][x]
+                  .rebuild((b) => b..isActive = !state.nodes[y][x].isActive)))
+        .toBuiltList();
 
     emit(state.rebuild((b) => b
       ..nodes = (nodes.toList()
             ..removeAt(y)
-            ..insert(
-                x,
-                (row.toList()
-                      ..removeAt(x)
-                      ..insert(x, node.rebuild((b) => b..isActive = true)))
-                    .toBuiltList()))
+            ..insert(y, updatedRow))
           .toBuiltList()
           .toBuilder()));
   }
