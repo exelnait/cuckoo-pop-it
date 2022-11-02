@@ -1,4 +1,5 @@
 import 'package:built_collection/built_collection.dart';
+import 'package:built_collection/built_collection.dart';
 import 'package:client/cubit/game_node_model.dart';
 import 'package:client/services/room_service.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -14,23 +15,23 @@ class GameCubit extends Cubit<GameState> {
   final _roomService = RoomService();
 
   Room? room;
+  late Subscription roomSubscription;
 
   Future<void> init(String roomId, int height, int width) async {
-    room = await _roomService.getRoom(roomId);
-    print(room);
+    await _roomService.participateRoom(roomId);
 
-    emit(GameState.init(
-        nodesLengthHorizontal: width, nodesLengthVertical: height));
+    room = await _roomService.getRoom(roomId);
+
+    emit(GameState.init(room: room!, nodesLengthVertical: height, nodesLengthHorizontal: width));
 
     QueryBuilder<ParseObject> roomQuery =
-        QueryBuilder<ParseObject>(ParseObject('Room'))
-          ..whereEqualTo('objectId', roomId);
-    Subscription subscription = await liveQuery.client.subscribe(roomQuery);
-    subscription.on(LiveQueryEvent.create, (value) {
-      print('*** CREATE ***: ${DateTime.now().toString()}\n $value ');
+      QueryBuilder<ParseObject>(ParseObject('Room'))..whereEqualTo('objectId', roomId);
+    roomSubscription = await liveQuery.client.subscribe(roomQuery);
+    roomSubscription.on(LiveQueryEvent.update, (value) {
+      print('*** UPDATE ***: ${DateTime.now().toString()}\n $value ');
       print((value as ParseObject).objectId);
-      print((value as ParseObject).updatedAt);
-      print((value as ParseObject).createdAt);
+
+      emit(state.rebuild((b) => b.participants = BuiltSet<String>(value.get('participants')).toBuilder()));
     });
   }
 
@@ -52,5 +53,10 @@ class GameCubit extends Cubit<GameState> {
                     .toBuiltList()))
           .toBuiltList()
           .toBuilder()));
+  }
+
+  dispose() async {
+    await _roomService.exitRoom(room!.objectId!);
+    liveQuery.client.unSubscribe(roomSubscription);
   }
 }

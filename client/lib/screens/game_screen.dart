@@ -22,6 +22,9 @@ class _GameView extends StatefulWidget {
 }
 
 class _GameViewState extends State<_GameView> {
+
+  final _gameCubit = getIt<GameCubit>();
+
   // late ByteData animationFile;
 
   @override
@@ -41,32 +44,38 @@ class _GameViewState extends State<_GameView> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<GameCubit, GameState>(
-        bloc: getIt<GameCubit>(),
-        builder: (context, state) {
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Center(
-                  child: ListView.builder(
-                      itemCount: state.nodes.length,
-                      shrinkWrap: true,
-                      itemBuilder: (context, i) => Row(
-                              children:
-                                  List.generate(state.nodes[i].length, (j) {
-                            return Node(
-                                onTap: () {
-                                  print('node tapped');
+    return BlocBuilder<GameCubit, GameState>(bloc: _gameCubit, builder: (context, state) {
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Text('Participants: ${state.participants.length}'),
+          Center(
+              child: ListView.builder(
+                  itemCount: state.nodes.length,
+                  shrinkWrap: true,
+                  itemBuilder: (context, i) => Row(
+                          children: List.generate(
+                        state.nodes[i].length,
+                        (j) => Node(
+                            onTap: () {
+                              print('node tapped');
 
-                                  print(i);
-                                  print(j);
+                              print(i);
+                              print(j);
+                              _gameCubit.tapNode(i, j);
+                            },
+                            value: state.nodes[i][j].isActive ? 1 : 0),
+                      )))),
+        ],
+      );
+    });
+  }
 
-                                  getIt<GameCubit>().tapNode(i, j);
-                                },
-                                value: state.nodes[i][j].isActive ? 1 : 0);
-                          })))),
-            ],
-          );
-        });
+  @override
+  void dispose() {
+    _gameCubit.dispose().then(() {
+      print('Game disposed');
+    });
+    super.dispose();
   }
 }
