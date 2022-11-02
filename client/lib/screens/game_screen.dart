@@ -22,38 +22,45 @@ class _GameView extends StatefulWidget {
 }
 
 class _GameViewState extends State<_GameView> {
-  // late ByteData animationFile;
+  final _gameCubit = getIt<GameCubit>();
 
   @override
   void initState() {
     super.initState();
-
-    // loadFile();
   }
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<GameCubit, GameState>(
-        bloc: getIt<GameCubit>(),
+        bloc: _gameCubit,
         builder: (context, state) {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
+              Text('Participants: ${state.participants.length}'),
               Center(
                   child: ListView.builder(
                       itemCount: state.nodes.length,
                       shrinkWrap: true,
                       itemBuilder: (context, i) => Row(
-                              children:
-                                  List.generate(state.nodes[i].length, (j) {
-                            return Node(
+                              children: List.generate(
+                            state.nodes[i].length,
+                            (j) => Node(
                                 onTap: () {
-                                  getIt<GameCubit>().tapNode(i, j);
+                                  _gameCubit.tapNode(i, j);
                                 },
-                                value: state.nodes[i][j].isActive);
-                          })))),
+                                value: state.nodes[i][j].isActive),
+                          )))),
             ],
           );
         });
+  }
+
+  @override
+  void dispose() {
+    _gameCubit.dispose().then(() {
+      print('Game disposed');
+    });
+    super.dispose();
   }
 }

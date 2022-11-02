@@ -1,6 +1,7 @@
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:client/cubit/game_node_model.dart';
+import 'package:client/services/room_service.dart';
 
 part 'game_state.g.dart';
 
@@ -15,7 +16,7 @@ abstract class GameState implements Built<GameState, GameStateBuilder> {
 
   factory GameState.empty() {
     return GameState((b) => b
-      ..isLoading = false
+      ..isLoading = true
       ..isLoaded = false
       ..isFinished = false
       ..participants = BuiltSet<String>().toBuilder()
@@ -23,14 +24,15 @@ abstract class GameState implements Built<GameState, GameStateBuilder> {
   }
 
   factory GameState.init({
+    required Room room,
     nodesLengthVertical = 10,
     nodesLengthHorizontal = 10,
   }) {
     return GameState((b) => b
       ..isLoading = false
-      ..isLoaded = false
+      ..isLoaded = true
       ..isFinished = false
-      ..participants = BuiltSet<String>().toBuilder()
+      ..participants = BuiltSet<String>(room.participants!).toBuilder()
       ..nodes = BuiltList<BuiltList<GameNode>>(List.generate(
           nodesLengthVertical,
           (_) => BuiltList<GameNode>(List.filled(nodesLengthHorizontal, 0)

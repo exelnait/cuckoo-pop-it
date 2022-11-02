@@ -6,17 +6,31 @@ import 'package:username_gen/username_gen.dart';
 class RoomService {
   final _authService = getIt<AuthService>();
 
-  Future<void> createRoom() async {
+  String get _myUserId {
+    return _authService.user!.objectId!;
+  }
+
+  Future<Room> createRoom() async {
     var room = Room()
       ..title = UsernameGen().generate()
-      ..creatorId = _authService.user!.objectId!
-      ..participants = [_authService.user!.objectId!];
+      ..creatorId = _myUserId
+      ..participants = [_myUserId];
     // ..set('color',
     //     Color((Random().nextDouble() * 0xFFFFFF).toInt()).withOpacity(1.0))
     var response = await room.save();
     print(response.result);
+    return room;
   }
 
+  participateRoom(roomId) async {
+    var updatedRoom = Room()..objectId = roomId..setAddUnique('participants', _myUserId);
+    await updatedRoom.save();
+  }
+
+  exitRoom(roomId) async {
+    var updatedRoom = Room()..objectId = roomId..setRemove('participants', _myUserId);
+    await updatedRoom.save();
+  }
 
   Future<Room> getRoom(String id) async {
     var response = await Room().getObject(id);
@@ -42,8 +56,8 @@ class Room extends ParseObject implements ParseCloneable {
 
   set creatorId(String? creatorId) => set<String?>('creatorId', creatorId);
 
-  List<String>? get participants => get<List<String>>('participants');
+  List<dynamic>? get participants => get<List<dynamic>>('participants');
 
-  set participants(List<String>? participants) =>
-      set<List<String>?>('participants', participants);
+  set participants(List<dynamic>? participants) =>
+      set<List<dynamic>?>('participants', participants);
 }

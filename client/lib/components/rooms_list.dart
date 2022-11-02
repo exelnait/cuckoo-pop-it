@@ -14,8 +14,9 @@ class RoomsList extends StatelessWidget {
 
   final _roomService = RoomService();
 
-  createRoom() async {
-    await _roomService.createRoom();
+  createRoom(context) async {
+    var room = await _roomService.createRoom();
+    openGame(room.objectId, context);
   }
 
   openGame(roomId, context) async {
@@ -29,7 +30,9 @@ class RoomsList extends StatelessWidget {
     return Container(
       child: Column(
         children: [
-          MaterialButton(onPressed: createRoom, child: Text('Create game')),
+          MaterialButton(onPressed: () {
+            createRoom(context);
+          }, child: Text('Create game')),
           ParseLiveListWidget<ParseObject>(
             shrinkWrap: true,
             query: query,
