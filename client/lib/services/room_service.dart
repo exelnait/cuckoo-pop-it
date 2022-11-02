@@ -15,6 +15,7 @@ class RoomService {
       ..title = Utils.generateUserName()
       ..creatorId = _myUserId
       ..isStarted = false
+      ..isFinished = false
       ..participants = [_myUserId];
     var response = await room.save();
     print(response.result);
@@ -32,6 +33,13 @@ class RoomService {
     var updatedRoom = Room()
       ..objectId = roomId
       ..set('isStarted', true);
+    await updatedRoom.save();
+  }
+
+  finishGame(roomId) async {
+    var updatedRoom = Room()
+      ..objectId = roomId
+      ..set('isFinished', true);
     await updatedRoom.save();
   }
 
@@ -65,6 +73,10 @@ class Room extends ParseObject implements ParseCloneable {
   bool? get isStarted => get<bool?>('isStarted');
 
   set isStarted(bool? isStarted) => set<bool?>('isStarted', isStarted);
+
+  bool? get isFinished => get<bool?>('isFinished');
+
+  set isFinished(bool? isFinished) => set<bool?>('isFinished', isFinished);
 
   String? get creatorId => get<String?>('creatorId');
 

@@ -45,9 +45,20 @@ class GameCubit extends Cubit<GameState> {
     roomSubscription.on(LiveQueryEvent.update, (value) {
       print('Room update');
       print(value);
+
+      if (!state.isStarted && value.get('isStarted')) {
+        startTimer();
+      }
+      if (!state.isFinished && value.get('isFinished')) {
+        emit(state.rebuild((b) => b..isFinished = true));
+        timer?.cancel();
+      }
+
       emit(state.rebuild((b) => b
         ..isStarted = value.get('isStarted')
-        ..participants = GameState.getParticipants(state.participants, value.get('participants')).toBuilder()));
+        ..participants = GameState.getParticipants(
+                state.participants, value.get('participants'))
+            .toBuilder()));
     });
 
     _gameEventService.subscription!.on(LiveQueryEvent.create, (value) {
@@ -58,7 +69,9 @@ class GameCubit extends Cubit<GameState> {
 
   Future<void> startGame() async {
     await _roomService.startGame(room!.objectId!);
+  }
 
+  void startTimer() {
     timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       emit(state.rebuild((b) => b..timerValue = state.timerValue + 1));
     });
@@ -83,8 +96,8 @@ class GameCubit extends Cubit<GameState> {
         }));
 
     if (count == nodes.length * nodes.length - 1) {
-      timer?.cancel();
-      emit(state.rebuild((b) => b..isFinished = true));
+      print('game finished');
+      _roomService.finishGame(room!.objectId!);
     }
 
     BuiltList<GameNode> updatedRow = (state.nodes[y].toList()

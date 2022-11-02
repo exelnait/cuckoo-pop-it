@@ -22,6 +22,7 @@ abstract class GameState implements Built<GameState, GameStateBuilder> {
   BuiltMap<String, Participant> get participants;
 
   BuiltList<BuiltList<GameNode>> get nodes;
+
   int get timerValue;
 
   GameState._();
@@ -49,10 +50,13 @@ abstract class GameState implements Built<GameState, GameStateBuilder> {
       ..isLoaded = true
       ..isFinished = false
       ..isStarted = false
-      ..participants = BuiltMap<String, Participant>({ for (var id in room.participants!) id : Participant(
+      ..participants = BuiltMap<String, Participant>({
+        for (var id in room.participants!)
+          id: Participant(
               id: id,
               name: Utils.generateUserName(),
-              color: Utils.generateColor()) }).toBuilder()
+              color: Utils.generateColor())
+      }).toBuilder()
       ..timerValue = 0
       ..nodes = BuiltList<BuiltList<GameNode>>(List.generate(
           nodesLengthVertical,
@@ -63,17 +67,21 @@ abstract class GameState implements Built<GameState, GameStateBuilder> {
 
   factory GameState([void Function(GameStateBuilder) updates]) = _$GameState;
 
-  static BuiltMap<String, Participant> getParticipants(BuiltMap<String, Participant>  oldParticipants, List<dynamic> newParticipants) {
-    return BuiltMap<String, Participant>(Map.fromIterable(newParticipants, key: (id) => id, value: (v) {
-    if (oldParticipants.containsKey(v)) {
-        return oldParticipants[v]!;
-      } else {
-        return Participant(
-            id: v,
-            name: Utils.generateUserName(),
-            color: Utils.generateColor());
-      }
-    }));
+  static BuiltMap<String, Participant> getParticipants(
+      BuiltMap<String, Participant> oldParticipants,
+      List<dynamic> newParticipants) {
+    return BuiltMap<String, Participant>(Map.fromIterable(newParticipants,
+        key: (id) => id,
+        value: (v) {
+          if (oldParticipants.containsKey(v)) {
+            return oldParticipants[v]!;
+          } else {
+            return Participant(
+                id: v,
+                name: Utils.generateUserName(),
+                color: Utils.generateColor());
+          }
+        }));
   }
 }
 
