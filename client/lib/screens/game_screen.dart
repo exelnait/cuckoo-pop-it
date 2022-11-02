@@ -2,6 +2,7 @@ import 'package:client/cubit/game_cubit.dart';
 import 'package:client/components/node.dart';
 import 'package:client/cubit/game_state.dart';
 import 'package:client/get_it.dart';
+import 'package:client/screens/finish_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -45,7 +46,15 @@ class _GameViewState extends State<_GameView> {
         await _gameCubit.dispose();
         return Future<bool>.value(true); // this will close the app,
       },
-      child: BlocBuilder<GameCubit, GameState>(
+      child: BlocConsumer<GameCubit, GameState>(
+          listenWhen: (previous, current) =>
+              previous.isFinished != current.isFinished,
+          listener: (context, state) {
+            if (state.isFinished) {
+              Navigator.of(context).pushReplacement(MaterialPageRoute(
+                  builder: (context) => const FinishScreen()));
+            }
+          },
           bloc: _gameCubit,
           builder: (context, state) {
             return Center(

@@ -85,7 +85,7 @@ class GameCubit extends Cubit<GameState> {
 
     if (count == nodes.length * nodes.length - 1) {
       timer?.cancel();
-      print('game finished');
+      emit(state.rebuild((b) => b..isFinished = true));
     }
 
     BuiltList<GameNode> updatedRow = (state.nodes[y].toList()

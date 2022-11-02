@@ -1,5 +1,6 @@
 import 'package:client/cubit/game_cubit.dart';
 import 'package:client/get_it.dart';
+import 'package:client/screens/finish_screen.dart';
 import 'package:client/screens/game_screen.dart';
 import 'package:client/services/room_service.dart';
 import 'package:flutter/material.dart';
